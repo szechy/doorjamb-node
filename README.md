@@ -1,20 +1,10 @@
-# MEAN Stack Single Page Application Starter
+# doorjamb-node
 
-This is a repo for a starter appliation for a Single Page MEAN Stack application. Just download and install and you have a good foundation for building application. 
+The web application running on an Intel Edison acting as a central hub for [Daniel Snyder's](https://github.com/snysly) and I's [EECS 373](https://www.eecs.umich.edu/eecs/academics/courses/eecs-373.html) Doorjamb project, working off of the University of Virginia's [Doorjamb research project](http://www.alice.virginia.edu/~whitehouse/research/buildingEnergy/hnat12doorjamb.pdf). This Nodejs project is based off of Scotch.io's [starter kit for Node and Angular single page apps](https://github.com/scotch-io/starter-node-angular).
 
-## Installation
-1. Download the repository
+## Installation/setup
+1. Clone the repository
 2. Install npm modules: `npm install`
 3. Install bower dependencies `bower install`
 4. Start up the server: `node server.js`
-5. View in browser at http://localhost:8080
-
-Use this starter kit to build any MEAN stack application you like.
-
-If you have any questions or requests, email us at [chris@scotch.io](mailto:chris@scotch.io) and we'll keep updating this to make it perfect.
-
-## Future Additions
-- CRUD examples
-- Development and Production Environments
-- Link examples
-- Single Page AngularJS Animations
+5. View in browser at http://localhost:3030
