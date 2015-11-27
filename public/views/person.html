@@ -25,8 +25,6 @@
 <div class="jumbotron-mini text-center">
     <!-- LOOP OVER THE TODOS IN $scope.todos -->
     <div class="checkbox" ng-repeat="person in persons">
-    	<p>{{ person.first_name }} {{ person.last_name }} - {{ person.height }}" - Room: {{ person.current_room }}</p>
-        <!--<h2>{{ person.first_name }} {{person.last_name}}</h2>
-        <h3>{{ person.height }}</h3><br>-->
+    	<p><b>{{ person.first_name }} {{ person.last_name }}</b> - {{ person.height }}" - Room: {{ person.current_room }}</p>
     </div>
 </div>

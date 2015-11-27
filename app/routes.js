@@ -46,6 +46,7 @@ module.exports = function(app) {
             else
                 console.log('person added');
         });
+        res.render('index');
     });
 
     /*app.get('/api/new_person', function(req, res) {
@@ -99,6 +100,7 @@ module.exports = function(app) {
             }
         });
         console.log("good work");
+        res.render('index');
     });
 	// frontend routes =========================================================
 	// route to handle all angular requests
