@@ -1,0 +1,32 @@
+<div class="jumbotron-mini text-center">
+	<h1>Users</h1>
+
+	<!--<p>{{ tagline }}</p>-->
+</div>
+
+<!-- ENTER NEW PERSON -->
+<div class="jumbotron-mini text-center">
+	<p>New user registration:</p>
+	<form action="/api/person/create" method="post">
+		<label for="first name">First Name:</label>
+		<input type="text" name="first_name" placeholder="First"/><br>
+
+		<label for="last name">Last Name:</label>
+		<input type="text" name="last_name" placeholder="Last"/><br>
+		<!-- Added the spaces to make things inline-->
+		<label for="height">Height:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<input type="number" name="height" placeholder="0.0"/><br>
+
+		<input type="submit" value="Enroll user"/>
+	</form>
+</div>
+
+<!-- PERSON LIST -->
+<div class="jumbotron-mini text-center">
+    <!-- LOOP OVER THE TODOS IN $scope.todos -->
+    <div class="checkbox" ng-repeat="person in persons">
+    	<p>{{ person.first_name }} {{ person.last_name }} - {{ person.height }}" - Room: {{ person.current_room }}</p>
+        <!--<h2>{{ person.first_name }} {{person.last_name}}</h2>
+        <h3>{{ person.height }}</h3><br>-->
+    </div>
+</div>
