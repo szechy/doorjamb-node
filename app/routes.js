@@ -20,14 +20,19 @@ module.exports = function(app) {
                 res.send(err);
             res.json(persons); // return all nerds in JSON format
         });
-        console.log('done finding people');
+    });
+
+    app.get('/api/person', function(req, res) {
+        console.log(req.body.person_id);
+        /*Person.findOne({}, function(err, person) {
+            if(err)
+                res.send(err);
+            res.json(person);
+        });*/
     });
 
     app.post('/api/person/create', function(req, res) {
         console.log('adding person');
-        //console.log(req.body.first_name);
-        //console.log(req.body.last_name);
-        console.log(req.body.height);
         //res.json(req.query);
         /*res.send('You sent first name: ' + req.body.first_name, 
             + ', last name: ' + req.body.last_name + ', height: '
@@ -89,7 +94,7 @@ module.exports = function(app) {
                 Log.create({
                     roomB: 1,
                     height: 69.5,
-                    persoon: result._id
+                    person: result
                 }, function(err) {
                     if(err != null)
                     {

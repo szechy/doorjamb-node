@@ -7,9 +7,7 @@
 <div class="jumbotron-mini text-center">
 	   <!-- LOOP OVER THE LOGS IN $scope.logs -->
     <div class="checkbox" ng-repeat="log in logs">
-    	
-        <!--<h2>{{ person.first_name }} {{person.last_name}}</h2>
-        <h3>{{ person.height }}</h3><br>-->
+    	<p><b>{{ log.person }}, {{ log.height }}"</b>: Room: {{ log.roomA }}->{{log.roomB}}, at time: {{log.timestamp}}</p>
     </div>
 
 </div>
