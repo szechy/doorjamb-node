@@ -22,13 +22,13 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/api/person', function(req, res) {
-        console.log(req.body.person_id);
-        /*Person.findOne({}, function(err, person) {
+    app.get('/api/person/:personId', function(req, res) {
+        console.log('In routes, ' + req.params.personId);
+        Person.findOne({}, function(err, person) {
             if(err)
                 res.send(err);
             res.json(person);
-        });*/
+        });
     });
 
     app.post('/api/person/create', function(req, res) {
@@ -94,6 +94,7 @@ module.exports = function(app) {
                 Log.create({
                     roomB: 1,
                     height: 69.5,
+                    actual_name: result.first_name + ' ' + result.last_name,
                     person: result
                 }, function(err) {
                     if(err != null)

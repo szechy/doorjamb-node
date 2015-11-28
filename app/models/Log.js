@@ -9,5 +9,6 @@ module.exports = mongoose.model('Log', {
 	roomB : {type : Number, default: 0},
 	timestamp: {type : Date, default: Date.now},
 	height: {type: Number, default: 0},
-	person: {type: mongoose.Schema.Types.ObjectId, ref: 'Person', index:true}
+	person: {type: mongoose.Schema.Types.ObjectId, ref: 'Person', index:true},
+	actual_name: {type: String, default: ''}
 });
