@@ -18,6 +18,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'LogController'
 		})
 
+		.when('/status', {
+			templateUrl: 'views/status.html',
+			controller: 'StatusController'
+		})
+
 	$locationProvider.html5Mode(true);
 
 }]);
