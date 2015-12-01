@@ -2,6 +2,7 @@
 //var Nerd = require('./models/nerd');
 var Person = require('./models/person');
 var Log = require('./models/log');
+//var Door = require('./models/door');
 
 module.exports = function(app) {
 
@@ -77,8 +78,8 @@ module.exports = function(app) {
             if(err)
                 res.send(err);
             res.json(logs);
+            console.log('done finding logs');
         });
-        console.log('done finding logs');
     });
 
     app.get('/api/new_log', function(req, res) {
@@ -107,6 +108,25 @@ module.exports = function(app) {
         });
         console.log("good work");
         res.render('index');
+    });
+
+    app.get('/api/doors', function(req, res) {
+        console.log('Finding doors');
+        Door.find(function(err, doors) {
+            if(err)
+                res.send(err);
+            res.json(logs);
+            console.log('done finding doors');
+        });
+    });
+
+    app.get('/api/new_door', function(req, res) {
+        console.log('creating door');
+        Door.create({
+            height: 99.9,
+            roomA: 4,
+            roomB: 3
+        });
     });
 	// frontend routes =========================================================
 	// route to handle all angular requests
