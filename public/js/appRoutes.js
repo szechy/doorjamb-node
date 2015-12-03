@@ -23,6 +23,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'StatusController'
 		})
 
+		.when('/doors', {
+			templateUrl: 'views/door.html',
+			controller: 'DoorController'
+		})
+
 	$locationProvider.html5Mode(true);
 
 }]);

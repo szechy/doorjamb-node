@@ -1,0 +1,32 @@
+<div class="jumbotron-mini text-center">
+	<h1>Door Lists</h1>
+
+	<p>{{ tagline }}</p>
+</div>
+
+<!-- ENTER NEW DOOR -->
+<div class="jumbotron-mini text-center">
+	<p>New user registration:</p>
+	<form action="/api/new_door" method="post">
+		<label for="ble_id">Bluetooth UUID:</label>
+		<input type="text" name="ble_id" placeholder="f9ab4572..."/><br>
+
+		<label for="last name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Height:</label>
+		<input type="number" step="any" min="0" name="height" placeholder="99.9"/><br>
+		<!-- Added the spaces to make things inline-->
+		<label for="roomA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomA:</label>
+		<input type="number" name="roomA" placeholder="0"/><br>
+		<label for="roomB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomB:</label>
+		<input type="number" name="roomB" placeholder="1"/><br>
+
+		<input type="submit" value="Enroll user"/>
+	</form>
+</div>
+
+<!-- DOOR LIST -->
+<div class="jumbotron-mini text-center">
+    <!-- LOOP OVER THE DOORS in $scope.doors -->
+    <div class="checkbox" ng-repeat="door in doors">
+    	<p><b>{{ door.ble_id }}, {{ door.height }}</b>": A: {{ door.roomA }} <-> {{ door.roomB }} :B</p>
+    </div>
+</div>

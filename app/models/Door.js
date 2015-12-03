@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 // module.exports allows us to pass this to other files when it is called
 module.exports = mongoose.model('Door', {
 	ble_id : {type : String, default: ''},
-	last_name : {type : String, default: ''},
-	height: {type: Number, default: 0},
-	current_room: {type: Number, default: 0}
+	roomA : {type : Number, default: 0},
+	roomB: {type: Number, default: 0},
+	height: {type: Number, default: 0}
 });
