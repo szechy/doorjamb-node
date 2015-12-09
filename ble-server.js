@@ -85,36 +85,54 @@ noble.on('discover', function(peripheral) {
       console.log("TRANSACTION_COUNT: " + transactionId.toString(16));
       
       // find Door
-
-      // find individual
-
-      // save as log
       if(transactionId != oldTransactionId)
       {
-        Log.create({
-          roomA: 11,
-          roomB: -1,
-          timestamp: Date.now(), 
-          height: height,
-        }, function(err) {
+       Door.findOne({'ble_id': peripheral.id}, function(err, result) {
+        if(err != null)
+        {
+          console.log("error");
+          console.log(err);
+        }
+        console.log("door: " + result.ble_id + "\t" + result.roomA + "->" + result.roomB);
+        // find individual by calculating height
+        var adjusted_height = calculateHeight(height, result);
+        console.log("adjusted: " + adjusted_height);
+        Person.findOne({'height': adjusted_height}, function(err, person) {
+          // save as log
+          console.log("found person: " + person.first_name + " " + person.last_name);
           if(err != null)
           {
-              console.log("error");
-              console.log(err);
+            console.log("error");
+            console.log(err);
           }
+          Log.create({
+            roomA: result.roomA,
+            roomB: result.roomB,
+            timestamp: Date.now(), 
+            height: height,
+            person: person,
+            actual_name: person.first_name + ' ' + person.last_name
+          }, function(err) {
+            if(err != null)
+            {
+                console.log("error");
+                console.log(err);
+            }
+          });
         });
-        oldTransactionId = transactionId;
+      });
+      oldTransactionId = transactionId;
       }
     }
-
-    /*if (serviceData) {
-      console.log('  Service Data      = ' + serviceData);
-    }
-
-    if (serviceUuids) {
-      console.log('  Service UUIDs     = ' + serviceUuids);
-    }*/
-    //exploreDoorjambCharacteristics(peripheral);
-    //exploreDoorjamb(peripheral);
-}
+  }
 });
+
+function calculateHeight(height, door)
+{
+  // calculate real height from mapping height to real height
+  // and using the door height
+  // pull all individuals
+  // match their height, set as polished height
+
+  return height;//[polished_height, real_height];
+}
