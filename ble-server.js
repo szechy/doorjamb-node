@@ -52,6 +52,7 @@ noble.on('stateChange', function(state) {
 noble.on('discover', function(peripheral) {
   //console.log('we\'ve discovered something ' + peripheral.id);
   //console.log(peripheral.id + ": " + peripheralIds.indexOf(peripheral.id));
+  //console.log(peripheral.advertisement.manufacturerData.toString('hex'));
   if (peripheralIds.indexOf(peripheral.id) > -1) {
     //noble.stopScanning();
 
@@ -78,11 +79,11 @@ noble.on('discover', function(peripheral) {
       //var data = manufacturerData.slice(4);
       console.log(data);
       var height = data.readUIntBE(0,4);
-      console.log("HEIGHT: " + height.toString(16));
+      console.log("HEIGHT: " + height.toString(10));
       var actionType = data.readUIntBE(4,1);
-      console.log("ACTION_TYPE: " + actionType.toString(16));
+      console.log("ACTION_TYPE: " + actionType.toString(10));
       var transactionId = data.readUIntBE(5,1);
-      console.log("TRANSACTION_COUNT: " + transactionId.toString(16));
+      console.log("TRANSACTION_COUNT: " + transactionId.toString(10));
       
       // find Door
       if(transactionId != oldTransactionId)
@@ -97,9 +98,9 @@ noble.on('discover', function(peripheral) {
         // find individual by calculating height
         var adjusted_height = calculateHeight(height, result);
         console.log("adjusted: " + adjusted_height);
-        Person.findOne({'height': adjusted_height}, function(err, person) {
+        /*Person.findOne({'height': adjusted_height}, function(err, person) {
           // save as log
-          console.log("found person: " + person.first_name + " " + person.last_name);
+          //console.log("found person: " + person.first_name + " " + person.last_name);
           if(err != null)
           {
             console.log("error");
@@ -119,7 +120,7 @@ noble.on('discover', function(peripheral) {
                 console.log(err);
             }
           });
-        });
+        });*/
       });
       oldTransactionId = transactionId;
       }

@@ -26,7 +26,10 @@
 <!-- DOOR LIST -->
 <div class="jumbotron-mini text-center">
     <!-- LOOP OVER THE DOORS in $scope.doors -->
-    <div class="checkbox" ng-repeat="door in doors">
-    	<p><b>{{ door.ble_id }}, {{ door.height }}</b>": A: {{ door.roomA }} <-> {{ door.roomB }} :B</p>
-    </div>
+    <form action="http://localhost:3000/api/door/delete/" + {{ door.ble_id style="margin: 0; padding: 0;" }} >
+    	<div class="checkbox" ng-repeat="door in doors">
+    	<p><b>{{ door.ble_id }}, {{ door.height }}</b>": A: {{ door.roomA }} <-> {{ door.roomB }} :B
+    	&nbsp;&nbsp;&nbsp;<input style="display: inline;" type="submit" value="Remove door"></p></p>
+    	</div>
+    </form>
 </div>

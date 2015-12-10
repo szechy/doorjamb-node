@@ -90,22 +90,17 @@ module.exports = function(app) {
         res.render('index');
     });
 
-    /*app.get('/api/new_person', function(req, res) {
-    	console.log("adding person");
-    	Person.create({
-            first_name: 'Colin',
-            last_name: 'Szechy',
-            height: 69.5,
-        }, function(err) {
-            if(err != null)
-            {
-                console.log("error")
-                console.log(err);
-            }
-        });
-    	console.log("done adding person");
+    app.get('/api/person/delete/', function(req, res) {
+        console.log("in the first delete one");
+    });
 
-    });*/
+    app.post('/api/person-delete/', function(req, res) {
+        Person.findByIdAndRemove(req.body.id, function(err, data) {
+            if(err)
+                console.log(err);
+            res.render('index');
+        });
+    });
 
     app.get('/api/logs', function(req, res) {
         console.log('Finding logs');

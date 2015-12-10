@@ -1,21 +1,21 @@
 <div class="jumbotron-mini text-center">
 	<h1>Users</h1>
 
-	<!--<p>{{ tagline }}</p>-->
+	<p>{{ tagline }}</p>
 </div>
 
 <!-- ENTER NEW PERSON -->
 <div class="jumbotron-mini text-center">
 	<p>New user registration:</p>
 	<form action="/api/person/create" method="post">
-		<label for="name">Name:</label>
+		<label for="name">Name:&nbsp;</label>
 		<input type="text" name="moniker" placeholder="Colin Szechy"/><br>
 
 		<!--<label for="last name">Last Name:</label>
 		<input type="text" name="last_name" placeholder="Last"/><br>-->
 		<!-- Added the spaces to make things inline-->
-		<label for="height">Height:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-		<input type="number" step="any" min="0" name="height" placeholder="0.0"/><br>
+		<label for="height">Height:</label>
+		<input type="number" step="any" min="0" name="height" placeholder="0.0"/><br><br>
 
 		<input type="submit" value="Enroll user"/>
 	</form>
@@ -25,6 +25,10 @@
 <div class="jumbotron-mini text-center">
     <!-- LOOP OVER THE TODOS IN $scope.todos -->
     <div class="checkbox" ng-repeat="person in persons">
-    	<p><b>{{ person.moniker }} </b> - {{ person.height }}" - Room: {{ person.current_room }}</p>
+    	<form action="/api/person-delete/" style="margin: 0; padding: 0;" method="post" >
+    		<input type="hidden" name="id" value="{{person._id}}">
+    		<p><b>{{ person.moniker }} </b> - {{ person.height }}" - Room: {{ person.current_room }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ person._id }}
+    		<input style="display: inline;" type="submit" value="Drop user"></p>
+    	</form>
     </div>
 </div>
