@@ -141,13 +141,21 @@ module.exports = function(app) {
     });
 
     app.get('/api/doors', function(req, res) {
-        console.log('Finding doors');
         Door.find(function(err, doors) {
             if(err)
                 res.send(err);
             res.json(doors);
             console.log('done finding doors');
         });
+    });
+
+    app.post('/api/door-delete/', function(req, res) {
+         Door.findByIdAndRemove(req.body.id, function(err, data) {
+            console.log('deleted door');
+            if(err)
+                console.log(err);
+            res.render('index');
+        });       
     });
 
     app.post('/api/new_door', function(req, res) {

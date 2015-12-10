@@ -27,8 +27,8 @@
     <div class="checkbox" ng-repeat="person in persons">
     	<form action="/api/person-delete/" style="margin: 0; padding: 0;" method="post" >
     		<input type="hidden" name="id" value="{{person._id}}">
-    		<p><b>{{ person.moniker }} </b> - {{ person.height }}" - Room: {{ person.current_room }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ person._id }}
-    		<input style="display: inline;" type="submit" value="Drop user"></p>
+    		<p><b>{{ person.moniker }} </b> - {{ person.height }}" - Room: {{ person.current_room }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    		<input style="display: inline;" type="submit" value="Delete"></p>
     	</form>
     </div>
 </div>
