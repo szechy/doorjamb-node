@@ -1,7 +1,7 @@
 var async 			= require('async');
 var noble			= require('noble');
 var mongoose 		= require('mongoose');
-//var Person 			= require('./app/models/person');
+var Person 			= require('./app/models/person');
 var Log 			= require('./app/models/log');
 var Door 			= require('./app/models/door');
 
@@ -55,8 +55,8 @@ noble.on('stateChange', function(state) {
 // peripheral discovery
 noble.on('discover', function(peripheral) {
   //console.log('we\'ve discovered something ' + peripheral.id);
-  //console.log(peripheral.id + ": " + peripheralIds.indexOf(peripheral.id));
-  //console.log(peripheral.advertisement.manufacturerData.toString('hex'));
+  console.log(peripheral.id + ": " + peripheralIds.indexOf(peripheral.id));
+  console.log(peripheral.advertisement.manufacturerData.toString('hex'));
   if (peripheralIds.indexOf(peripheral.id) > -1) {
     //noble.stopScanning();
 
@@ -79,14 +79,28 @@ noble.on('discover', function(peripheral) {
 
     if (manufacturerData) {
       console.log('  Manufacturer Data = ' + manufacturerData.toString('hex'));
-      var data = manufacturerData.slice(2);
+	console.log(Buffer.isBuffer(manufacturerData));	
+console.log(typeof(manufacturerData));      
+var data = manufacturerData;
+	var data = manufacturerData.slice(2);
       //var data = manufacturerData.slice(4);
       console.log(data);
-      var height = data.readUIntBE(0,4);
-      console.log("HEIGHT: " + height.toString(10));
-      var actionType = data.readUIntBE(4,1);
+	console.log(typeof(data));
+	//var newData = Object.create(Buffer, data);
+//console.log(newData);
+//console.log(typeof(newData));
+	var buf = new Buffer(data);
+	for(var i = 0; i < data.length; i++)
+{	console.log("[" + i + "]: " + data[i].toString(16)); 
+}
+	var height = data[3] + (data[2] << 8);
+//var height = buf.readUIntBE(2,4);//data.readUIntBE(0,4);
+      console.log("HEIGHT: " + height.toString(10) + " " + height.toString(16));
+      var actionType = data[4];
+
+//var actionType = data.readUIntBE(4,1);
       console.log("ACTION_TYPE: " + actionType.toString(10));
-      var transactionId = data.readUIntBE(5,1);
+      var transactionId = data[5];//data.readUIntBE(5,1);
       console.log("TRANSACTION_COUNT: " + transactionId.toString(10));
       
       var adjusted_height = calculateHeight(height);
