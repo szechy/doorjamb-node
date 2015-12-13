@@ -47,13 +47,20 @@ module.exports = function(app, passport) {
     // report status for one person
     app.get('/api/status/:personName', function(req, res) {
         var proper = req.params.personName.replace("+", " ");
-        Person.findOne({'first_name': proper}, function(err, person) {
+        console.log(proper);
+        Person.findOne({'moniker': proper}, function(err, person) {
             console.log(person);
             var status = { 
                     name: person.moniker,
                     room: person.current_room
                 };
-            res.json(status);
+            if(!person.do_not_track)
+                res.json(status);
+            else
+            {
+                res.statusCode = 401;
+                res.send("You sure?");
+            }
         });
     });
 
@@ -94,12 +101,22 @@ module.exports = function(app, passport) {
         console.log("in the first delete one");
     });
 
-    app.post('/api/person-delete/', function(req, res) {
-        Person.findByIdAndRemove(req.body.id, function(err, data) {
+    app.post('/api/person-modify/', isLoggedIn, function(req, res) {
+        console.log(req.body);
+        if(req.body.delete)
+        {
+            res.render('index');
+        }
+        else if(req.body.donottrack)
+        {
+            res.render('/profile');
+        }
+        /*Person.findByIdAndRemove(req.body.id, function(err, data) {
             if(err)
                 console.log(err);
             res.render('index');
-        });
+        });*/
+        //res.render('/profile');
     });
 
     app.get('/api/logs', function(req, res) {
@@ -204,7 +221,7 @@ module.exports = function(app, passport) {
   
   // PROFILE
   // this will be protected
-  app.get('/profile/*', function(req, res) {//isLoggedIn, function(req, res) {
+  app.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile.ejs', {
       person: req.person // get user out of session, pass to template
     });

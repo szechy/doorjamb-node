@@ -27,6 +27,7 @@ module.exports = function(passport) {
     passReqToCallback: true // allows us to pass back the entire request
   },
   function(req, email, password, done) {
+    console.log("moniker: " + req.body.moniker);
     console.log('test ' + email);
     // asynchronous
     // Person.findOne wont fire unless data is sent back
@@ -38,6 +39,7 @@ module.exports = function(passport) {
 
       newPerson.local.email = email;
       newPerson.local.password = newPerson.generateHash(password);
+      newPerson.moniker = req.body.moniker;
       console.log(newPerson.local.password);
 
       newPerson.save(function(err) {

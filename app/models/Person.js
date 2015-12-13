@@ -16,7 +16,8 @@ var personSchema = mongoose.Schema({
 	//first_name : {type : String, default: ''},
 	//last_name : {type : String, default: ''},
 	height: {type: Number, default: 0},
-	current_room: {type: Number, default: 0}
+	current_room: {type: Number, default: -1},
+    do_not_track: {type: Boolean, default: false}
 });
 
 // methods ======================
