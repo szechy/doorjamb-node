@@ -4,7 +4,7 @@ var Person = require('./models/person');
 var Log = require('./models/log');
 var Door = require('./models/door');
 
-module.exports = function(app) {
+module.exports = function(app, passport) {
 
 	// server routes ===========================================================
 	// handle things like api calls
@@ -168,17 +168,70 @@ module.exports = function(app) {
         });
         res.render('index');
     });
-	// frontend routes =========================================================
-	// route to handle all angular requests
-	/*app.get('*', function(req, res) {
-		res.sendfile('./public/index.html');
-	});*/
+
+  // HOME PAGE
+  app.get('/', function(req, res) {
+    res.render('index.ejs');
+  });
+
+  // LOGIN
+  app.get('/login', function(req, res) {
+    // render page and pass in any flash data if it exists
+    res.render('login.ejs', { message: req.flash('loginMessage')});
+  });
+
+  app.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/profile',  // redirect to secure profile section
+    failureRedirect: '/login', // redirect back to signup page
+    failureFlash: true // allow flash messages
+  }));
+
+  // process lgoin form
+  // app.post('/login', do all our passprot stuff here);
+  
+  // SIGNUP
+  app.get('/signup', function(req, res) {
+    // render page and pass in any flash data if it exists
+    res.render('signup.ejs', { message: req.flash('signupMessage') });
+  });
+
+  // process signup form
+  app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/profile', 
+    failureRedirect: '/signup',
+    failureFlash: true  // allow flash messages
+  }));
+  
+  // PROFILE
+  // this will be protected
+  app.get('/profile/*', function(req, res) {//isLoggedIn, function(req, res) {
+    res.render('profile.ejs', {
+      person: req.person // get user out of session, pass to template
+    });
+  });
+
+  // LOGOUT
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+//};
+
+    // route middleware to make sure user is logged in
+    function isLoggedIn(req, res, next) {
+      // if user is auth in session, carry on
+      if(req.isAuthenticated())
+        return next();
+      
+      // if they aren't, redirect to home page
+      res.redirect('/');
+    }
 
 	// index page
     // use res.render with ejs I guess 
-	app.get('*', function(req, res) {
-	    res.render('index');
-	});
+	//app.get('/profile', function(req, res) {
+	//    res.render('index');
+	//});
 
 
 };

@@ -3,27 +3,27 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 	$routeProvider
 
 		// home page
-		.when('/', {
+		.when('/profile', {
 			templateUrl: 'views/home.html',
 			controller: 'MainController'
 		})
 
-		.when('/persons', {
+		.when('/profile/persons', {
 			templateUrl: 'views/person.html',
 			controller: 'PersonController'
 		})
 
-		.when('/logs', {
+		.when('/profile/logs', {
 			templateUrl: 'views/log.html',
 			controller: 'LogController'
 		})
 
-		.when('/status', {
+		.when('/profile/status', {
 			templateUrl: 'views/status.html',
 			controller: 'StatusController'
 		})
 
-		.when('/doors', {
+		.when('/profile/doors', {
 			templateUrl: 'views/door.html',
 			controller: 'DoorController'
 		})
